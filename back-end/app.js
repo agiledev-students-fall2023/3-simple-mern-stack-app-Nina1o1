@@ -3,6 +3,8 @@ const express = require('express') // CommonJS import style!
 const morgan = require('morgan') // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') // middleware for enabling CORS (Cross-Origin Resource Sharing) requests.
 const mongoose = require('mongoose')
+// const url = require('url')
+// const path = require('path')
 
 const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -11,6 +13,10 @@ app.use(cors()) // allow cross-origin resource sharing
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+
+// serve my photo (static file)
+// const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // connect to database
 mongoose
@@ -75,6 +81,29 @@ app.post('/messages/save', async (req, res) => {
     return res.status(400).json({
       error: err,
       status: 'failed to save the message to the database',
+    })
+  }
+})
+
+app.get('/aboutus', (req, res) => {
+  try {
+    const myparags = "My name is Qiwen Xiao, also go by Nina.\n" +
+    "I tell everyone that Nina is my preferred name.\n" +
+    "It is weird, isn't it? You see... my real name is Qiwen.\n" +
+    "But I really like 'Nina.' I picked this name from a list of English names in an English class when I was really little.\n" +
+    "I picked it because the 'n' in 'nina' assembled a cave hole. That fascinated me." +
+    "Also, my friends like to call me 'nani,'" +
+    "... which is a dramatic 'what' in English\n" + 
+    "So wierd that I actually identify myself with an English name!"
+    return res.json({
+      myparags: myparags,
+      myimg: ""
+    })
+  } catch {
+    console.error(err)
+    return res.status(400).json({
+      error: err,
+      status: 'failed to retrieve messages from the database',
     })
   }
 })
