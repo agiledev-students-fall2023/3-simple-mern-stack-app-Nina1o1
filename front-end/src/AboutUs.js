@@ -10,9 +10,12 @@ const AboutUs = () => {
   useEffect(() => {
     (async () => {
       const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/aboutus`)
-      
-      setMyparags(response.data?.myparags?.split("\n") || "")
-      setMyimg(response.data?.myimg || "")
+      const resParags = response.data?.myparags?.split("\n") || ""
+      const resImg = response.data?.myimg ? 
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/${response.data?.myimg}` : 
+        ""
+      setMyparags(resParags)
+      setMyimg(resImg)
     })()
   }, [])
   return(
@@ -21,9 +24,7 @@ const AboutUs = () => {
     
     <div className="my-intro">
       {Array.isArray(myparags) ?
-      myparags?.map((parag, i) => {
-        return <MyP p={parag} key={i}/>
-      }) :
+      myparags?.map((parag, i) => <MyP p={parag} key={i}/>) :
       <MyP p={myparags} />}
     </div>
     
