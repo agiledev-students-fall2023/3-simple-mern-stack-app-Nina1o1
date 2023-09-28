@@ -96,7 +96,7 @@ app.get('/aboutus', (req, res) => {
     "So wierd that I actually identify myself with an English name!"
     return res.json({
       myparags: myparags,
-      myimg: "myphoto.jpg"
+      myimg: `http://localhost:${process.env.PORT}/myphoto.jpg`
     })
   } catch {
     console.error(err)

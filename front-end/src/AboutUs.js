@@ -5,17 +5,13 @@ import axios from "axios"
 const AboutUs = () => {
   
   const [myparags, setMyparags] = useState("")
-  const [myimg, setMyimg] = useState(null)
+  const [myimg, setMyimg] = useState("")
 
   useEffect(() => {
     (async () => {
       const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/aboutus`)
-      const resParags = response.data?.myparags?.split("\n") || ""
-      const resImg = response.data?.myimg ? 
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/${response.data?.myimg}` : 
-        ""
-      setMyparags(resParags)
-      setMyimg(resImg)
+      setMyparags(response.data?.myparags?.split("\n") || "")
+      setMyimg(response.data?.myimg || "")
     })()
   }, [])
   return(
