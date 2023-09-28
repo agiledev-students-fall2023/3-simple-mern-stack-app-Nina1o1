@@ -57,6 +57,7 @@ app.get('/messages/:messageId', async (req, res) => {
     })
   }
 })
+
 // a route to handle logging out users
 app.post('/messages/save', async (req, res) => {
   // try to save the message to the database

@@ -1,1 +1,19 @@
-{}
+{
+  "name": "3-simple-mern-stack-app-nina1o1",
+  "description": "This is a so-called \"monorepo\" - a single repository containing all the components necessary to build and run an app:",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agiledev-students-fall2023/3-simple-mern-stack-app-Nina1o1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agiledev-students-fall2023/3-simple-mern-stack-app-Nina1o1/issues"
+  },
+  "homepage": "https://github.com/agiledev-students-fall2023/3-simple-mern-stack-app-Nina1o1#readme"
+}
